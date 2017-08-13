@@ -1,0 +1,23 @@
+<h1>Mini Blog</h1>
+<%= form_for(@blog, url:{controller: 'blogs', action: 'create'}) do |form| %>
+  <%= form.text_field :body, placeholder: "投稿しよう" %>
+  <%= form.submit "投稿する" %>
+<% end %>
+<hr>
+
+<ul id="blogs">
+<% @blogs.each do |blog| %>
+  <li class="blog">
+    <p>
+      <span><%= blog.id %>: </span>
+      <span class="body"><a href="/blogs/show/<%= blog.id %>"><%= blog.body %></a></span>
+    </p>
+
+    <p class="meta">
+      <span class="like"><a href="/blogs/like/<%= blog.id %>">いいね</a>:<%= blog.like %> | </span>
+      <span class="comment">コメント数: <%= blog.replies.size %> |</span>
+      <span class="post-date">投稿日時: <%= blog.created_at %></span>
+    </p>
+  </li>
+<% end %>
+</ul>

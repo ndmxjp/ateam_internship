@@ -1,0 +1,39 @@
+<h1>Mini Blog</h1>
+<p><a href="/blogs">戻る</a></p>
+
+<div class="blog-detail">
+  <p>
+    <span><%= @blog.id %>:</span>
+    <span class="post-date">投稿日時: <%= @blog.created_at %></span>
+    <span class="like">|
+      <a href="/blogs/like/<%= @blog.id %>?is_show=1">いいね</a>
+      : <%= @blog.like %>
+    </span>
+  </p>
+  <p class="body"><%= @blog.body %></p>
+</div>
+
+<%= form_for(@reply, url:{controller:'replies', action:'create'}) do |form| %>
+  <%= form.text_field :comment, placeholder: "コメントしよう" %>
+  <%= form.submit "コメントする" %>
+<% end %>
+
+<hr>
+
+<!-- <div class="replies">
+  <div class="reply"> -->
+    <% if @blog.replies.empty? %>
+      <p>コメントはありません</p>
+    <% end %>
+
+    <ol id="replies">
+    <% @blog.replies.reverse.each do |reply| %>
+      <li class="reply"><p>
+        <span class="comment"><%= reply.comment %></span>
+        <span>|</span>
+        <span class="post-date"><%= "投稿日時:#{reply.created_at}" %></span>
+      </p></li>
+    <% end %>
+    </ol>
+  <!-- </div>
+</div> -->
